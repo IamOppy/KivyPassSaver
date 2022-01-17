@@ -1,0 +1,161 @@
+#: import get_color_from_hex kivy.utils.get_color_from_hex
+#: import Gradient kivy_gradient.Gradient
+<LoginScreen>
+    canvas:
+        Rectangle:
+            pos: self.x, self.y
+            size: 1000, 1000
+            texture: Gradient.horizontal(get_color_from_hex("ebf4f5"), get_color_from_hex("b5c6e0"))
+
+        Color:
+            rgba:(255, 99, 71, 0.5)
+        Rectangle:
+            pos: self.x + 230 , self.y + 50
+            size: 350, 500
+
+    GridLayout:
+        Label:
+            text:"Password"
+            color:(0,0,0)
+            pos: root.x + 350, root.y + 305
+        Label:
+            text:"Username"
+            color: (0,0,0)
+            pos: root.x + 350, root.y + 405
+
+        TextInput:
+            id: username_query
+            text:"U"
+            pos: root.x + 305, root.x + 400
+            size_hint: None, None
+            size: 200, 40
+        TextInput:
+            id: password_query
+            text:"P"
+            pos: root.x + 305, root.x + 300
+            size_hint: None, None
+            size: 200, 40
+        Button:
+            pos: root.x + 285, root.x + 100
+            size_hint: None, None
+            size: 250, 60
+            text: "LOGIN"
+            on_press: root.validate_user()
+            background_normal: 'images/normal.png'
+            background_down:'images/down.png'
+
+
+<MenuScreen>
+    canvas:
+        Rectangle:
+            pos: self.x, self.y
+            size: 1000, 1000
+            texture: Gradient.horizontal(get_color_from_hex("ebf4f5"), get_color_from_hex("b5c6e0"))
+
+        Color:
+            rgba:(255, 99, 71, 0.5)
+        Rectangle:
+            pos: self.x + 230 , self.y + 50
+            size: 350, 500
+
+    GridLayout:
+        cols:1
+        padding: 250
+        spacing:20
+        Button:
+            text: "Save Login"
+            on_press:root.create_login()
+
+        Button:
+            text: "View Saved Logins"
+            on_press:root.view_logins()
+
+<SaveScreen>
+    canvas:
+        Rectangle:
+            pos: self.x, self.y
+            size: 1000, 1000
+            texture: Gradient.horizontal(get_color_from_hex("ebf4f5"), get_color_from_hex("b5c6e0"))
+
+        Color:
+            rgba:(255, 99, 71, 0.5)
+        Rectangle:
+            pos: self.x + 230 , self.y + 50
+            size: 350, 500
+
+    GridLayout:
+        Label:
+            text: "Save Login For: ex.Website"
+            color: (128,128,128)
+            pos: root.x + 350, root.y + 205
+        Label:
+            text:"Password"
+            color:(128,128,128)
+            pos: root.x + 350, root.y + 305
+
+        Label:
+            text:"Username"
+            color: (128,128,128)
+            pos: root.x + 350, root.y + 405
+
+        TextInput:
+            id:save_username
+            pos:root.x + 305, root.y + 400
+            size_hint: None, None
+            size: 200, 40
+        TextInput:
+            id: save_password
+            pos: root.x + 305, root.y + 300
+            size_hint: None, None
+            size: 200, 40
+        TextInput:
+            id: Website_name
+            pos: root.x + 305, root.y + 200
+            size_hint: None, None
+            size: 200, 40
+        Button:
+            pos: root.x + 285, root.x + 100
+            size_hint: None, None
+            size: 250, 60
+            text:"ADD"
+            on_press: root.save_info()
+        Button:
+            pos: root.x + 285, root.x + 60
+            size_hint: None, None
+            size: 250, 30
+            text:"BACK"
+            on_press: root.redirect()
+
+
+<RoundedButton@Button>
+    canvas.before:
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [18]
+
+
+
+
+
+<RootWidget>
+    #"""changing background color for root widget"""
+    canvas.before:
+        Color:
+            #rgba:(0.3, 0.2, 0.1, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    LoginScreen:
+        id: login_screen
+        name: "login_screen"
+
+    MenuScreen:
+        id: menu_screen
+        name:"menu_screen"
+
+    SaveScreen:
+        id: save_screen
+        name:"save_screen"
+
